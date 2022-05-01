@@ -30,6 +30,13 @@ class Member:
         names = detail.data.name
         return print(names)
 
+    def social_handle(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        handles = detail.data.username
+        return print(handles)
+
     def biog(self):
         info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
         member_handle = self.handle
@@ -38,8 +45,10 @@ class Member:
         response = client.get_users(ids=ident, user_fields=["description"])
         for user in response.data:
             bio = user.description
-            print(bio)
-            return
+            return print(bio)
+
+
+
 
 
 
@@ -56,6 +65,7 @@ Member_1 = Member('Marie-Louise',
 
 Member_1.id()
 Member_1.social_name()
+Member_1.social_handle()
 Member_1.biog()
 
 
