@@ -57,6 +57,16 @@ class Member:
             test = user.location
             return print(test)
 
+    def link(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        response = client.get_users(ids=ident, user_fields=["url"])
+        for user in response.data:
+            test = user.url
+            return print(test)
+
 
 # Create instances of the Member Class
 Member_1 = Member('Marie-Louise',
@@ -74,6 +84,7 @@ Member_1.social_name()
 Member_1.social_handle()
 Member_1.biog()
 Member_1.loc()
+Member_1.link()
 
 
 def _id():
