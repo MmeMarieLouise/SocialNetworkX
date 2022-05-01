@@ -6,8 +6,7 @@ client = tweepy.Client(bearer_token=config.BEARER_TOKEN)
 
 # constructor
 class Member:
-    def __init__(self, id, name, handle, bio, location, url, date, followers, following):
-        self.id = id
+    def __init__(self, name, handle, bio, location, url, date, followers, following):
         self.name = name
         self.handle = handle
         self.bio = bio
@@ -17,11 +16,36 @@ class Member:
         self.followers = followers
         self.following = following
 
+    def id(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        return print(ident)
 
-# Object instantiation
-Member_1 = Member(config.USER_ID,
-                  'Marie-Louise',
-                  '@MmeMarieLouise',
+    def social_name(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        names = detail.data.name
+        return print(names)
+
+    def biog(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        response = client.get_users(ids=ident, user_fields=["description"])
+        for user in response.data:
+            bio = user.description
+            print(bio)
+            return
+
+
+
+# Create instances of the Member Class
+Member_1 = Member('Marie-Louise',
+                  'MmeMarieLouise',
                   'Data Scientist @UKCivilService| Global Council member @pyladies | Proud #Mama. Views are my own. '
                   'She / Her',
                   'London,UK',
@@ -30,6 +54,17 @@ Member_1 = Member(config.USER_ID,
                   client.get_users_followers(id=config.USER_ID),
                   client.get_users_following(id=config.USER_ID))
 
+Member_1.id()
+Member_1.social_name()
+Member_1.biog()
+
+
+def _id():
+    info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+    detail = info.get_user(username='MesrenyameDogbe')
+    return print(detail.data.id)
+
 
 print(f'{Member_1.followers}')
 print(f'{Member_1.following}')
+print(f'{Member_1.name}')
