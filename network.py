@@ -54,8 +54,8 @@ class Member:
         ident = detail.data.id
         response = client.get_users(ids=ident, user_fields=["location"])
         for user in response.data:
-            test = user.location
-            return print(test)
+            loca = user.location
+            return print(loca)
 
     def link(self):
         info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
@@ -64,8 +64,8 @@ class Member:
         ident = detail.data.id
         response = client.get_users(ids=ident, user_fields=["url"])
         for user in response.data:
-            test = user.url
-            return print(test)
+            urls = user.url
+            return print(urls)
 
 
 # Create instances of the Member Class
