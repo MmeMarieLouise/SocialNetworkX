@@ -47,9 +47,15 @@ class Member:
             bio = user.description
             return print(bio)
 
-
-
-
+    def loc(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        response = client.get_users(ids=ident, user_fields=["location"])
+        for user in response.data:
+            test = user.location
+            return print(test)
 
 
 # Create instances of the Member Class
@@ -67,6 +73,7 @@ Member_1.id()
 Member_1.social_name()
 Member_1.social_handle()
 Member_1.biog()
+Member_1.loc()
 
 
 def _id():
