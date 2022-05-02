@@ -1,5 +1,7 @@
 import tweepy
 import config
+import networkx as nx
+import matplotlib.pyplot as plt
 
 client = tweepy.Client(bearer_token=config.BEARER_TOKEN)
 
@@ -122,3 +124,20 @@ Member_1.link()
 Member_1.date_made()
 Member_1.friends()
 Member_1.follows()
+
+# initialise a multi empty graph
+P = nx.MultiDiGraph()
+
+# add nodes
+P.add_nodes_from([Member_1, Member_2, Member_3, Member_4, Member_5, Member_6, Member_7, Member_8])
+
+# view nodes
+print(P.nodes())
+
+# add connections
+
+Me = P.add_edges_from([(Member_1, Member_2), (Member_1, Member_3), (Member_1, Member_4), (Member_1, Member_5),
+                       (Member_1, Member_6), (Member_1, Member_7), (Member_1, Member_8)])
+
+nx.draw(P)
+plt.show()
