@@ -6,10 +6,9 @@ client = tweepy.Client(bearer_token=config.BEARER_TOKEN)
 
 # constructor
 class Member:
-    def __init__(self, name, handle, following):
+    def __init__(self, name, handle):
         self.name = name
         self.handle = handle
-        self.following = following
 
     def id(self):
         info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
@@ -80,11 +79,18 @@ class Member:
         followers = client.get_users_followers(id=ident, user_fields=['username'], max_results=100)
         return print(followers)
 
+    def follows(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        follows = client.get_users_following(id=ident, user_fields=['username'], max_results=100)
+        return print(follows)
+
 
 # Create instances of the Member Class
 Member_1 = Member('Marie-Louise',
-                  'MmeMarieLouise',
-                  client.get_users_following(id=config.USER_ID))
+                  'MmeMarieLouise')
 
 Member_1.id()
 Member_1.social_name()
@@ -94,3 +100,4 @@ Member_1.loc()
 Member_1.link()
 Member_1.date_made()
 Member_1.friends()
+Member_1.follows()
