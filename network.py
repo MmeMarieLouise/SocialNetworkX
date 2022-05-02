@@ -135,9 +135,29 @@ P.add_nodes_from([Member_1, Member_2, Member_3, Member_4, Member_5, Member_6, Me
 print(P.nodes())
 
 # add connections
-
 Me = P.add_edges_from([(Member_1, Member_2), (Member_1, Member_3), (Member_1, Member_4), (Member_1, Member_5),
                        (Member_1, Member_6), (Member_1, Member_7), (Member_1, Member_8)])
 
+reciprocal = P.add_edges_from([(Member_2, Member_1), (Member_3, Member_1), (Member_4, Member_1), (Member_5, Member_1),
+                               (Member_6, Member_1), (Member_8, Member_1)])
+
+second_degree = P.add_edges_from([(Member_2, Member_7), (Member_2, Member_5), (Member_2, Member_6),
+                                  (Member_2, Member_3), (Member_2, Member_8), (Member_5, Member_8),
+                                  (Member_5, Member_7), (Member_5, Member_6), (Member_5, Member_4),
+                                  (Member_5, Member_2), (Member_5, Member_3), (Member_5, Member_8),
+                                  (Member_6, Member_3), (Member_6, Member_2), (Member_6, Member_4),
+                                  (Member_6, Member_5), (Member_6, Member_2), (Member_6, Member_8),
+                                  (Member_7, Member_2), (Member_7, Member_2),
+                                  (Member_7, Member_2), (Member_7, Member_3), (Member_7, Member_4),
+                                  (Member_7, Member_5),
+                                  (Member_7, Member_6), (Member_7, Member_8), (Member_4, Member_3),
+                                  (Member_4, Member_5),
+                                  (Member_4, Member_6), (Member_4, Member_7), (Member_4, Member_8),
+                                  (Member_3, Member_2),
+                                  (Member_3, Member_4), (Member_3, Member_5), (Member_3, Member_6),
+                                  (Member_3, Member_7),
+                                  (Member_3, Member_8), (Member_8, Member_2), (Member_8, Member_3),
+                                  (Member_8, Member_4),
+                                  (Member_8, Member_5), (Member_8, Member_6), (Member_8, Member_7)])
 nx.draw(P)
 plt.show()
