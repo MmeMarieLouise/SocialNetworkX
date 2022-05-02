@@ -6,14 +6,9 @@ client = tweepy.Client(bearer_token=config.BEARER_TOKEN)
 
 # constructor
 class Member:
-    def __init__(self, name, handle, bio, location, url, date, followers, following):
+    def __init__(self, name, handle, following):
         self.name = name
         self.handle = handle
-        self.bio = bio
-        self.location = location
-        self.url = url
-        self.date = date
-        self.followers = followers
         self.following = following
 
     def id(self):
@@ -77,16 +72,18 @@ class Member:
             dates = user.created_at
             return print(dates)
 
+    def friends(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        followers = client.get_users_followers(id=ident, user_fields=['username'], max_results=100)
+        return print(followers)
+
 
 # Create instances of the Member Class
 Member_1 = Member('Marie-Louise',
                   'MmeMarieLouise',
-                  'Data Scientist @UKCivilService| Global Council member @pyladies | Proud #Mama. Views are my own. '
-                  'She / Her',
-                  'London,UK',
-                  'https://linktr.ee/MmeMarieLouise',
-                  'May 2016',
-                  client.get_users_followers(id=config.USER_ID),
                   client.get_users_following(id=config.USER_ID))
 
 Member_1.id()
@@ -96,14 +93,4 @@ Member_1.biog()
 Member_1.loc()
 Member_1.link()
 Member_1.date_made()
-
-
-def _id():
-    info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
-    detail = info.get_user(username='MesrenyameDogbe')
-    return print(detail.data.id)
-
-
-print(f'{Member_1.followers}')
-print(f'{Member_1.following}')
-print(f'{Member_1.name}')
+Member_1.friends()
