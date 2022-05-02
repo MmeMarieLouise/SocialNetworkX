@@ -92,6 +92,27 @@ class Member:
 Member_1 = Member('Marie-Louise',
                   'MmeMarieLouise')
 
+Member_2 = Member('Mesrenyame',
+                  'MesrenyameDogbe')
+
+Member_3 = Member('Loooorena "La Tigresa" @ PyCon',
+                  'Loooorenanicole')
+
+Member_4 = Member('Lynn Root',
+                  'roguelynn')
+
+Member_5 = Member('Mariatta',
+                  'mariatta')
+
+Member_6 = Member('Georgically',
+                  'Georgically1')
+
+Member_7 = Member('Carol Willing',
+                  'WillingCarol')
+
+Member_8 = Member('Denny Perez',
+                  'dennyperez18')
+
 Member_1.id()
 Member_1.social_name()
 Member_1.social_handle()
