@@ -67,6 +67,16 @@ class Member:
             urls = user.url
             return print(urls)
 
+    def date_made(self):
+        info = tweepy.Client(bearer_token=config.BEARER_TOKEN)
+        member_handle = self.handle
+        detail = info.get_user(username=member_handle)
+        ident = detail.data.id
+        response = client.get_users(ids=ident, user_fields=["created_at"])
+        for user in response.data:
+            dates = user.created_at
+            return print(dates)
+
 
 # Create instances of the Member Class
 Member_1 = Member('Marie-Louise',
@@ -85,6 +95,7 @@ Member_1.social_handle()
 Member_1.biog()
 Member_1.loc()
 Member_1.link()
+Member_1.date_made()
 
 
 def _id():
